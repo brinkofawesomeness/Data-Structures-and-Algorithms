@@ -1,0 +1,18 @@
+CONTRIBUTIONS:
+I decided to do this project solo, so all the code you see was written by me (besides the Makefile and input files). The two most time consuming parts of this project were writing the constructor for the graph that read in all the data and Dijkstra's algorithm. Another part that was unexpectedly time consuming was figuring out how to set up the Map, Path, and Tile objects so that it was a balance between easy and efficient.
+
+
+QUESTION 1:
+The map itself is just a list of tiles (or nodes in a graph), and I created a hash table of tile types so it would be quick and easy to find each cost. Each tile is composed of an adjacency list that holds pointers to paths between the tiles (which are the edges in the graph). Each path's weight was the cost of the *from tile, since the cost wasn't actually added until the runner left the tile.
+
+
+QUESTION 2:
+The constructor runs at O(N^2), since I stored everything in a 2D vector when I was reading in the data to make it easy to translate to a graph. Dijkstra's algorithm, however, runs at O(|V|+|E|log(|V|)), since Dijkstra's visits each node and edge once, and at every edge, it checks to see if we can insert a node into the multimap.
+
+
+QUESTION 3:
+The scalability is very hard to tell because the times were so fast. I'm not sure if this was because I was doing something wrong when I was benchmarking, but I played around with it and they feel accurate because the program runs very fast without timing it, up until you start generating 1000 x 1000 maps. As N got bigger (around 500 and 1000), the program seemed to grow exponentially, since I doubled N and the time was almost 6 times slower. Memory stayed constant the entire time. Again, not sure if I was doing something wrong -- I've never benchmarked my programs before. If my program was tested with a much larger N, the data might be more meaningful, but right now, it's hard to tell.
+
+
+NOTE:
+If there are any issues, the Git repo is https://github.com/brinkofawesomeness/project04. Everything should be working correctly there -- just pull everything and type "make".
